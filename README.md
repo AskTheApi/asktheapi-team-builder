@@ -23,108 +23,102 @@ pip install autogen-team-builder
 
 ## Quick Start
 
-Here's a simple example of how to use the package:
+Here's how to use the package:
 
+
+
+# 1. Create agents from OpenAPI spec
 ```python
-from autogen_team_builder import TeamBuilder, Agent, Tool, Message
-
-# Define your agents
-calculator = Agent(
-    name="Calculator",
-    description="A math expert that can perform calculations",
-    system_prompt="You are a math expert. Help solve mathematical problems.",
-    tools=[
-        Tool(
-            name="calculate",
-            description="Perform a calculation",
-            method="POST",
-            path="/calculate",
-            jsonschema={
-                "type": "object",
-                "properties": {
-                    "expression": {"type": "string"}
-                }
-            }
-        )
-    ]
-)
-
-researcher = Agent(
-    name="Researcher",
-    description="An agent that can search and summarize information",
-    system_prompt="You are a research expert. Find and summarize information.",
-    tools=[
-        Tool(
-            name="search",
-            description="Search for information",
-            method="GET",
-            path="/search",
-            jsonschema={
-                "type": "object",
-                "properties": {
-                    "query": {"type": "string"}
-                }
-            }
-        )
-    ]
-)
-
-# Create a team builder
-team_builder = TeamBuilder(model="gpt-4")
-
-# Build the team
-team = await team_builder.build_team([calculator, researcher])
-
-# Run the team with a task
-messages = [
-    Message(
-        role="user",
-        content="Calculate the square root of 16 and then find some interesting facts about the number 4."
+from asktheapi_team_builder import TeamBuilder, Agent, Tool, Message, APISpecHandler
+from typing import List
+async def create_agents_from_spec():
+    # Initialize handlers
+    api_spec_handler = APISpecHandler(llm_service)  # llm_service is your LLM provider
+    
+    # Download and parse OpenAPI spec
+    spec_content = await api_spec_handler.download_url_spec("https://api.example.com/openapi.json")
+    
+    # Classify endpoints into logical groups
+    classification_result = await api_spec_handler.classify_spec(
+        spec_content,
+        system_prompt="Classify these API endpoints into logical groups",
+        user_prompt="Please analyze the API spec and group related endpoints"
     )
-]
+    
+    # Generate agents for each group
+    agents = []
+    for group_spec in classification_result.specs:
+        agent_result = await api_spec_handler.generate_agent_for_group(
+            group_spec,
+            spec_content,
+            system_prompt="Generate an agent for this group of endpoints",
+            user_prompt="Create an agent that can effectively use these endpoints"
+        )
+        agents.append(agent_result)
+    
+    return agents
 
-result = await team_builder.run_team(team, messages)
-```
-
-## Advanced Usage
-
-### Custom Tool Implementation
-
-You can create agents with custom tools that interact with your APIs:
-
-```python
-agent = Agent(
-    name="WeatherAgent",
-    description="Provides weather information",
-    system_prompt="You are a weather expert.",
-    base_url="https://api.weather.com",
-    tools=[
-        Tool(
-            name="get_weather",
-            description="Get weather for a location",
-            method="GET",
-            path="/weather",
-            jsonschema={
-                "type": "object",
-                "properties": {
-                    "location": {"type": "string"},
-                    "units": {"type": "string", "enum": ["metric", "imperial"]}
-                },
-                "required": ["location"]
-            }
+# 3. Build and run a team
+async def run_agent_team(agents: List[Agent], query: str):
+    # Initialize team builder
+    team_builder = TeamBuilder(
+        model="gpt-4",
+        model_config={"temperature": 0.7}
+    )
+    
+    # Build the team
+    team = await team_builder.build_team(agents)
+    
+    # Create messages
+    messages = [
+        Message(
+            role="user",
+            content=query
         )
     ]
-)
-```
+    
+    # Run the team with streaming
+    async for event in team_builder.run_team(team, messages, stream=True):
+        if isinstance(event, ChatMessage):
+            print(f"{event.source}: {event.content}")
+        
+# Example usage
+async def main():
+    # Create agents from spec
+    api_agents = await create_agents_from_spec()
+    
+    # Combine with manual agents
+    all_agents = [weather_agent] + api_agents
+    
+    # Run the team
+    await run_agent_team(
+        all_agents,
+        "What's the weather like in London and how might it affect local businesses?"
+    )
 
-### Streaming Support
+## Custom Headers and Configuration
 
-You can stream the agent interactions:
+You can configure the team builder with custom headers and model settings:
 
 ```python
-async for event in team_builder.run_team(team, messages, stream=True):
-    if isinstance(event, ChatMessage):
-        print(f"{event.source}: {event.content}")
+team_builder = TeamBuilder(
+    model="gpt-4",
+    model_config={
+        "temperature": 0.7,
+        "default_headers": {
+            "Authorization": "Bearer your-token",
+            "Custom-Header": "custom-value"
+        }
+    }
+)
+
+# Run team with extra headers for specific requests
+team = await team_builder.build_team(agents)
+result = await team_builder.run_team(
+    team,
+    messages,
+    extra_headers={"Request-ID": "123"}
+)
 ```
 
 ## Contributing
