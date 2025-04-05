@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["asktheapi_team_builder"]
+package-dir = {"" = "src"}
+
+[project]
+name = "asktheapi-team-builder"
+version = "0.1.0"
+authors = [
+    { name = "Alex Albala", email = "alex.albala@gmail.com" },
+]
+description = "A high-level library for building and managing teams of AutoGen agents"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["autogen", "agents", "ai", "team", "automation", "llm", "openai"]
+dependencies = [
+    "autogen-agentchat>=0.4.7",
+    "autogen-ext[openai]>=0.4.7",
+    "aiohttp>=3.8.0",
+    "pydantic>=2.0.0",
+    "openai>=1.63.2",
+    "pyyaml>=6.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/alexalbala/autogen-team-builder"
+"Bug Tracker" = "https://github.com/alexalbala/autogen-team-builder/issues"
+"Documentation" = "https://github.com/alexalbala/autogen-team-builder#readme"
+"Source Code" = "https://github.com/alexalbala/autogen-team-builder"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.5.0",
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.3.0",
+]
