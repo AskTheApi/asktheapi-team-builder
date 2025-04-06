@@ -95,6 +95,7 @@ async def main():
         all_agents,
         "What's the weather like in London and how might it affect local businesses?"
     )
+```
 
 ## Custom Headers and Configuration
 
