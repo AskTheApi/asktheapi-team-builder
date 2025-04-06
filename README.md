@@ -1,8 +1,8 @@
 # AutoGen Team Builder
 
-[![PyPI version](https://badge.fury.io/py/autogen-team-builder.svg)](https://badge.fury.io/py/autogen-team-builder)
+[![PyPI version](https://badge.fury.io/py/asktheapi-team-builder.svg)](https://badge.fury.io/py/asktheapi-team-builder)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Versions](https://img.shields.io/pypi/pyversions/autogen-team-builder.svg)](https://pypi.org/project/autogen-team-builder/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/asktheapi-team-builder.svg)](https://pypi.org/project/asktheapi-team-builder/)
 
 A high-level Python library for easily building and managing teams of AutoGen agents. This package provides a clean, type-safe interface for creating, configuring, and running teams of agents that can work together to solve complex tasks.
 
@@ -18,7 +18,7 @@ A high-level Python library for easily building and managing teams of AutoGen ag
 ## Installation
 
 ```bash
-pip install autogen-team-builder
+pip install asktheapi-team-builder
 ```
 
 ## Quick Start
@@ -135,8 +135,8 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ```bash
 # Clone the repository
-git clone https://github.com/alexalbala/autogen-team-builder.git
-cd autogen-team-builder
+git clone https://github.com/alexalbala/asktheapi-team-builder.git
+cd asktheapi-team-builder
 
 # Install dependencies
 pip install -e ".[dev]"

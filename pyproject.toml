@@ -39,10 +39,10 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/alexalbala/autogen-team-builder"
-"Bug Tracker" = "https://github.com/alexalbala/autogen-team-builder/issues"
-"Documentation" = "https://github.com/alexalbala/autogen-team-builder#readme"
-"Source Code" = "https://github.com/alexalbala/autogen-team-builder"
+"Homepage" = "https://github.com/alexalbala/asktheapi-team-builder"
+"Bug Tracker" = "https://github.com/alexalbala/asktheapi-team-builder/issues"
+"Documentation" = "https://github.com/alexalbala/asktheapi-team-builder#readme"
+"Source Code" = "https://github.com/alexalbala/asktheapi-team-builder"
 
 [project.optional-dependencies]
 dev = [
