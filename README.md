@@ -1,14 +1,14 @@
-# AutoGen Team Builder
+# AskTheApi Team Builder
 
 [![PyPI version](https://badge.fury.io/py/asktheapi-team-builder.svg)](https://badge.fury.io/py/asktheapi-team-builder)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Versions](https://img.shields.io/pypi/pyversions/asktheapi-team-builder.svg)](https://pypi.org/project/asktheapi-team-builder/)
 
-A high-level Python library for easily building and managing teams of AutoGen agents. This package provides a clean, type-safe interface for creating, configuring, and running teams of agents that can work together to solve complex tasks.
+A high-level Python library for easily building and managing autonomous agents networks that solve complex tasks using APIs defined with OpenAPI standard format. This package provides a clean, type-safe interface for creating, configuring, and running teams of agents that can work together to solve complex tasks.
 
 ## Features
 
-- 🚀 Easy creation of individual agents with custom tools and capabilities
+- 🚀 Easy creation of agent networks with custom tools and capabilities based on openAPI specification
 - 🤝 Team building with automatic coordination through a planning agent
 - 📡 Support for streaming agent interactions
 - 🔧 Built-in HTTP client for tool implementation
