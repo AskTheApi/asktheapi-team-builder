@@ -33,7 +33,7 @@ from asktheapi_team_builder import TeamBuilder, Agent, Tool, Message, APISpecHan
 from typing import List
 async def create_agents_from_spec():
     # Initialize handlers
-    api_spec_handler = APISpecHandler(llm_service)  # llm_service is your LLM provider
+    api_spec_handler = APISpecHandler()
     
     # Download and parse OpenAPI spec
     spec_content = await api_spec_handler.download_url_spec("https://api.example.com/openapi.json")
