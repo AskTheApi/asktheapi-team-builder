@@ -8,9 +8,9 @@ package-dir = {"" = "src"}
 
 [project]
 name = "asktheapi-team-builder"
-version = "0.1.0"
+version = "0.2.1"
 authors = [
-    { name = "Alex Albala", email = "alex.albala@gmail.com" },
+    { name = "Alex Albala" },
 ]
 description = "A high-level library for building and managing teams of AutoGen agents"
 readme = "README.md"
@@ -28,7 +28,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-keywords = ["autogen", "agents", "ai", "team", "automation", "llm", "openai"]
+keywords = ["autogen", "agents", "ai", "team", "automation", "llm", "openai", "openapi"]
 dependencies = [
     "autogen-agentchat>=0.4.7",
     "autogen-ext[openai]>=0.4.7",

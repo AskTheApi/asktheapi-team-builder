@@ -3,7 +3,8 @@ import yaml
 import json
 import aiohttp
 from pydantic import BaseModel
-from src.asktheapi_team_builder.prompts.agents_apispec_prompt import CLASSIFY_SPEC_SYSTEM, CLASSIFY_SPEC_USER, GENERATE_AGENT_FOR_SPEC_SYSTEM, GENERATE_AGENT_FOR_SPEC_USER
+from asktheapi_team_builder.prompts.agents_apispec_prompt import CLASSIFY_SPEC_SYSTEM, CLASSIFY_SPEC_USER, GENERATE_AGENT_FOR_SPEC_SYSTEM, GENERATE_AGENT_FOR_SPEC_USER
+from asktheapi_team_builder.services.llm_service import LLMService
 
 class APISpecClassification(BaseModel):
     name: str
@@ -20,8 +21,8 @@ class APISpecAgentResult(BaseModel):
     user_prompt: str
 
 class APISpecHandler:
-    def __init__(self, llm_service: Any = None):
-        self.llm_service = llm_service
+    def __init__(self, headers: dict = {}):
+        self.llm_service = LLMService(llm_headers=headers)
 
     async def download_url_spec(self, url: str) -> dict:
         """Download and parse OpenAPI spec from URL."""
