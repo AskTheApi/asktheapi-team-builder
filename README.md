@@ -40,9 +40,7 @@ async def create_agents_from_spec():
     
     # Classify endpoints into logical groups
     classification_result = await api_spec_handler.classify_spec(
-        spec_content,
-        system_prompt="Classify these API endpoints into logical groups",
-        user_prompt="Please analyze the API spec and group related endpoints"
+        spec_content
     )
     
     # Generate agents for each group
@@ -50,9 +48,7 @@ async def create_agents_from_spec():
     for group_spec in classification_result.specs:
         agent_result = await api_spec_handler.generate_agent_for_group(
             group_spec,
-            spec_content,
-            system_prompt="Generate an agent for this group of endpoints",
-            user_prompt="Create an agent that can effectively use these endpoints"
+            spec_content
         )
         agents.append(agent_result)
     

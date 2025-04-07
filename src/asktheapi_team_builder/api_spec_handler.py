@@ -3,6 +3,7 @@ import yaml
 import json
 import aiohttp
 from pydantic import BaseModel
+from src.asktheapi_team_builder.prompts.agents_apispec_prompt import CLASSIFY_SPEC_SYSTEM, CLASSIFY_SPEC_USER, GENERATE_AGENT_FOR_SPEC_SYSTEM, GENERATE_AGENT_FOR_SPEC_USER
 
 class APISpecClassification(BaseModel):
     name: str
@@ -88,17 +89,17 @@ class APISpecHandler:
         path_content = [{"path": p, "content": content['paths'][p]} for p in filtered_paths]
         return path_content, components
 
-    async def classify_spec(self, content: dict, classify_system_prompt: str, classify_user_prompt: str) -> APISpecClassificationResult:
+    async def classify_spec(self, content: dict) -> APISpecClassificationResult:
         """Classify API endpoints into logical groups."""
         if not self.llm_service:
             raise ValueError("LLM service is required for classification")
 
         messages = [{
             "role": "system",
-            "content": classify_system_prompt.format(current_groups="")
+            "content": CLASSIFY_SPEC_SYSTEM.format(current_groups="")
         }, {
             "role": "user",
-            "content": classify_user_prompt.format(spec_info=json.dumps(content['paths']))
+            "content": CLASSIFY_SPEC_USER.format(spec_info=json.dumps(content['paths']))
         }]
         
         llm_response = await self.llm_service.chat_completion("gpt-4o-mini", messages, False)
@@ -107,9 +108,7 @@ class APISpecHandler:
 
     async def generate_agent_for_group(self, 
                                      group_spec: APISpecClassification, 
-                                     content: dict,
-                                     generate_system_prompt: str,
-                                     generate_user_prompt: str) -> APISpecAgentResult:
+                                     content: dict) -> APISpecAgentResult:
         """Generate an agent for a group of related endpoints."""
         if not self.llm_service:
             raise ValueError("LLM service is required for agent generation")
@@ -117,10 +116,10 @@ class APISpecHandler:
         paths, components = self.get_components_for_paths(group_spec.paths, content)
         messages = [{
             "role": "system",
-            "content": generate_system_prompt
+            "content": GENERATE_AGENT_FOR_SPEC_SYSTEM
         }, {
             "role": "user",
-            "content": generate_user_prompt.format(
+            "content": GENERATE_AGENT_FOR_SPEC_USER.format(
                 paths=paths, 
                 components=components, 
                 security=content.get('securitySchemes', {})
