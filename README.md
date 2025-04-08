@@ -8,29 +8,17 @@ A high-level Python library for building and managing networks of autonomous age
 
 ## Features
 
-- 🚀 Effortless Agent Network Creation:
+- 🚀 Effortless Agent Network Creation: Quickly build agent networks with custom tools and capabilities based on OpenAPI specifications.
 
-Quickly build agent networks with custom tools and capabilities based on OpenAPI specifications.
+- 🤝 Team-Based Collaboration: Easily define agent teams with automatic coordination handled by a built-in planning agent.
 
-- 🤝 Team-Based Collaboration:
+- 📡 Streaming Interactions: Stream agent communication in real-time for more dynamic and responsive workflows.
 
-Easily define agent teams with automatic coordination handled by a built-in planning agent.
+- 🔧 Built-in HTTP Client: Simplify tool implementation with an integrated HTTP client ready to call external APIs.
 
-- 📡 Streaming Interactions:
+- ✨ Type Safety with Pydantic: Leverage Pydantic models for robust data validation and clear type definitions.
 
-Stream agent communication in real-time for more dynamic and responsive workflows.
-
-- 🔧 Built-in HTTP Client:
-
-Simplify tool implementation with an integrated HTTP client ready to call external APIs.
-
-- ✨ Type Safety with Pydantic:
-
-Leverage Pydantic models for robust data validation and clear type definitions.
-
-- 🎯 Clean and Intuitive API:
-
-Designed for developers—minimal boilerplate, maximum clarity.
+- 🎯 Clean and Intuitive API: Designed for developers—minimal boilerplate, maximum clarity.
 
 ## Installation
 
