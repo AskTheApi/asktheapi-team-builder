@@ -14,11 +14,19 @@ class APISpecClassification(BaseModel):
 class APISpecClassificationResult(BaseModel):
     specs: List[APISpecClassification]
 
+class APISpecAgentToolResult(BaseModel):
+    name: str
+    description: str
+    jsonschema: dict
+    path: str
+    method: str
+    
 class APISpecAgentResult(BaseModel):
     name: str
     description: str
     system_prompt: str
     user_prompt: str
+    tools: List[APISpecAgentToolResult]
 
 class APISpecHandler:
     def __init__(self, headers: dict = {}):
