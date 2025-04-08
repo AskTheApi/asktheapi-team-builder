@@ -1,4 +1,4 @@
-from services.open_ai_service import OpenAIService
+from asktheapi_team_builder.services.open_ai_service import OpenAIService
 
 
 class LLMService():
@@ -7,4 +7,5 @@ class LLMService():
         self.llm_headers = llm_headers
     
     async def chat_completion(self, model, messages, stream):
-        return await self.openai_service.completion_with_headers(model, messages, stream, self.llm_headers)
+        return await self.openai_service.completion_with_headers(
+            model=model, messages=messages, stream=stream, headers=self.llm_headers)

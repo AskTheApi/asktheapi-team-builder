@@ -4,16 +4,27 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Versions](https://img.shields.io/pypi/pyversions/asktheapi-team-builder.svg)](https://pypi.org/project/asktheapi-team-builder/)
 
-A high-level Python library for easily building and managing autonomous agents networks that solve complex tasks using APIs defined with OpenAPI standard format. This package provides a clean, type-safe interface for creating, configuring, and running teams of agents that can work together to solve complex tasks.
+A high-level Python library for building and managing networks of autonomous agents that collaborate to solve complex tasks. It’s designed to work seamlessly with APIs defined using the OpenAPI standard. The library provides a clean, type-safe interface for creating, configuring, and running teams of agents, making it easy to orchestrate multi-agent workflows with minimal boilerplate.
 
 ## Features
 
-- 🚀 Easy creation of agent networks with custom tools and capabilities based on openAPI specification
-- 🤝 Team building with automatic coordination through a planning agent
-- 📡 Support for streaming agent interactions
-- 🔧 Built-in HTTP client for tool implementation
-- ✨ Pydantic models for type safety and validation
-- 🎯 Clean, intuitive API design
+- 🚀 Effortless Agent Network Creation
+Quickly build agent networks with custom tools and capabilities based on OpenAPI specifications.
+
+- 🤝 Team-Based Collaboration
+Easily define agent teams with automatic coordination handled by a built-in planning agent.
+
+- 📡 Streaming Interactions
+Stream agent communication in real-time for more dynamic and responsive workflows.
+
+- 🔧 Built-in HTTP Client
+Simplify tool implementation with an integrated HTTP client ready to call external APIs.
+
+- ✨ Type Safety with Pydantic
+Leverage Pydantic models for robust data validation and clear type definitions.
+
+- 🎯 Clean and Intuitive API
+Designed for developers—minimal boilerplate, maximum clarity.
 
 ## Installation
 
@@ -53,8 +64,10 @@ async def create_agents_from_spec():
         agents.append(agent_result)
     
     return agents
+```
 
-# 3. Build and run a team
+# 2. Build and run a team
+```python
 async def run_agent_team(agents: List[Agent], query: str):
     # Initialize team builder
     team_builder = TeamBuilder(
@@ -77,8 +90,9 @@ async def run_agent_team(agents: List[Agent], query: str):
     async for event in team_builder.run_team(team, messages, stream=True):
         if isinstance(event, ChatMessage):
             print(f"{event.source}: {event.content}")
-        
+```        
 # Example usage
+```python
 async def main():
     # Create agents from spec
     api_agents = await create_agents_from_spec()
