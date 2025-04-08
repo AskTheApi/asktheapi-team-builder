@@ -36,6 +36,7 @@ dependencies = [
     "pydantic>=2.0.0",
     "openai>=1.63.2",
     "pyyaml>=6.0.0",
+    "fastmcp>=0.4.1",
 ]
 
 [project.urls]
