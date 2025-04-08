@@ -8,7 +8,7 @@ package-dir = {"" = "src"}
 
 [project]
 name = "asktheapi-team-builder"
-version = "0.2.2"
+version = "0.3.0"
 authors = [
     { name = "Alex Albala" },
 ]

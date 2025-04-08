@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Versions](https://img.shields.io/pypi/pyversions/asktheapi-team-builder.svg)](https://pypi.org/project/asktheapi-team-builder/)
 
-A high-level Python library for building and managing networks of autonomous agents that collaborate to solve complex tasks. It’s designed to work seamlessly with APIs defined using the OpenAPI standard. The library provides a clean, type-safe interface for creating, configuring, and running teams of agents, making it easy to orchestrate multi-agent workflows with minimal boilerplate.
+A high-level Python library for building and managing networks of autonomous agents that collaborate to solve complex tasks. It's designed to work seamlessly with APIs defined using the OpenAPI standard. The library provides a clean, type-safe interface for creating, configuring, and running teams of agents, making it easy to orchestrate multi-agent workflows with minimal boilerplate.
 
 ## Features
 
@@ -125,6 +125,37 @@ result = await team_builder.run_team(
     extra_headers={"Request-ID": "123"}
 )
 ```
+
+## MCP (Model Control Protocol) Support
+
+The library includes built-in support for Model Control Protocol, allowing you to expose your agent teams as API endpoints with automatic tool generation from OpenAPI specifications.
+
+```python
+from asktheapi_team_builder import MCPService, MCPConfig
+
+# Configure MCP service
+mcp_config = MCPConfig(
+    transport="sse",  # Server-Sent Events transport
+    port=8000,        # Port to run the MCP server
+    name="asktheapi_mcp"  # Service name
+)
+
+# Initialize MCP service
+mcp_service = MCPService(mcp_config)
+
+# Start MCP server with OpenAPI spec
+await mcp_service.start_from_spec(
+    url_spec="https://api.example.com/openapi.json",
+    headers={"Authorization": "Bearer your-token"}
+)
+```
+
+The MCP service will:
+- Automatically download and parse the OpenAPI specification
+- Classify endpoints into logical groups
+- Generate appropriate tools for each group
+- Expose these tools through a Model Control Protocol interface
+- Handle real-time streaming of agent interactions
 
 ## Contributing
 
