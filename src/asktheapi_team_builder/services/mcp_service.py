@@ -5,7 +5,7 @@ from asktheapi_team_builder.core.api_spec_handler import APISpecHandler
 from asktheapi_team_builder.core.tool_builder import build_tool_function
 
 class MCPConfig(BaseModel):
-    transport: "sse" | "stdio" = "sse"
+    transport: str = "sse"
     port: int = 8000
     name: str = "asktheapi_mcp"
     
@@ -32,5 +32,5 @@ class MCPService():
         self.mcp.run(self.mcp_config.transport)
         
     async def start_from_spec(self, url_spec: str, headers: dict = {}):
-        self._create_from_spec(url_spec, headers)
-        self._run_mcp()
+        await self._create_from_spec(url_spec, headers)
+        await self._run_mcp()
