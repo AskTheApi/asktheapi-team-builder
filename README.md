@@ -126,9 +126,9 @@ result = await team_builder.run_team(
 )
 ```
 
-## MCP (Model Control Protocol) Support
+## MCP (Model Context Protocol) Support
 
-The library includes built-in support for Model Control Protocol, allowing you to expose your agent teams as API endpoints with automatic tool generation from OpenAPI specifications.
+The library includes built-in support for Model Context Protocol, allowing you to expose your agent teams as API endpoints with automatic tool generation from OpenAPI specifications.
 
 ```python
 from asktheapi_team_builder import MCPService, MCPConfig
