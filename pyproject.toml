@@ -3,12 +3,14 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["asktheapi_team_builder"]
 package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [project]
 name = "asktheapi-team-builder"
-version = "0.3.0"
+version = "0.3.1"
 authors = [
     { name = "Alex Albala" },
 ]
